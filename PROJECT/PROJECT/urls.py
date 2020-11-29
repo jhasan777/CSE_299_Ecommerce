@@ -37,5 +37,11 @@ urlpatterns = [
     #### API's
 
     path('api/users/', include('users.urls')),  #users api urls|||includes /rest-auth
+    path('api/products/', include('product.urls')),
+
+
+    path('/store', include(#'product.urls')),
+    path('', ),
+
 
 ]
