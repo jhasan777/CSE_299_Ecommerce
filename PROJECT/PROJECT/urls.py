@@ -40,8 +40,8 @@ urlpatterns = [
     path('api/products/', include('product.urls')),
 
 
-    path('/store', include(#'product.urls')),
-    path('', ),
+   # path('/store', include(#'product.urls')),
+
 
 
 ]

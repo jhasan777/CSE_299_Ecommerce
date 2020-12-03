@@ -2,29 +2,30 @@ from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import serializers
 
 from PROJECT.product.models import Product
-from PROJECT.product.models import Product
-from restshop.api.unit.serializers import UnitForOrderDetail
+from PROJECT.order.models import OrderUnit
+
+
+from PROJECT.product.serializers import ProductForOrderDetail
 
 
 class CartUnitSerializer(serializers.Serializer):
-    sku = serializers.CharField(write_only=True)
     quantity = serializers.IntegerField(default=1, min_value=1)
-    unit = UnitForOrderDetail(read_only=True)
+    product = ProductForOrderDetail(read_only=True)
 
     class Meta:
         model = OrderUnit
-        fields = ('sku', 'quantity', 'unit')
+        fields = ('slug', 'quantity', 'product')
 
     def validate(self, data):
-        sku = data['sku']
+        slug = data['slug']
         quantity = data['quantity']
 
         try:
-            unit = Unit.objects.get(sku=sku)
+            product = Product.objects.get(slug=slug)
         except ObjectDoesNotExist:
-            raise serializers.ValidationError('Unit does not exist')
+            raise serializers.ValidationError('Product does not exist')
 
-        if unit.num_in_stock < quantity:
+        if product.num_in_stock < quantity:
             raise serializers.ValidationError('There are not enough units in stock')
 
         return data

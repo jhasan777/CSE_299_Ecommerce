@@ -7,9 +7,14 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from restshop.api.cart.models import CartUnit
-from restshop.api.cart.serializers import CartUnitSerializer
-from restshop.api.unit.models import Unit
+# from restshop.api.cart.models import CartUnit
+# from restshop.api.cart.serializers import CartUnitSerializer
+# from restshop.api.unit.models import Unit
+
+from .models import CartUnit
+from .serializers import CartUnitSerializer
+from PROJECT.product.models import Product
+
 
 
 class CartView(APIView):
@@ -24,7 +29,7 @@ class CartView(APIView):
 
             cart_units = Session.objects.get(session_key=request.session.session_key).cart_units.all()
 
-        return Response(CartUnitSerializer(cart_units.order_by('unit__sku'), many=True).data, status=status.HTTP_200_OK)
+        return Response(CartUnitSerializer(cart_units.order_by('product__slug'), many=True).data, status=status.HTTP_200_OK)
 
     def post(self, request):
         serializer = CartUnitSerializer(data=request.data)
@@ -32,10 +37,10 @@ class CartView(APIView):
 
         data = serializer.validated_data
 
-        unit = Unit.objects.get(sku=data['sku'])
+        product = Product.objects.get(slug=data['slug'])
 
         cart_unit_data = {
-            'unit': unit,
+            'product': product,
             'user': None,
             'session': None
         }
@@ -62,7 +67,7 @@ class CartView(APIView):
 class CartUnitView(APIView):
     permission_classes = (AllowAny,)
 
-    def delete(self, request, sku=None):
+    def delete(self, request, slug=None):
         if not bool(request.user.is_anonymous):
             cart_units = request.user.cart_units.all()
         else:
@@ -71,7 +76,7 @@ class CartUnitView(APIView):
 
             cart_units = Session.objects.get(session_key=request.session.session_key).cart_units.all()
 
-        cart_unit = cart_units.filter(unit__sku=sku).first()
+        cart_unit = cart_units.filter(product__slug=slug).first()
 
         if cart_unit is None:
             return Response(status=status.HTTP_400_BAD_REQUEST)

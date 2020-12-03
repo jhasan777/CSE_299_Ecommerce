@@ -29,3 +29,10 @@ class OrderUnit(models.Model):
 
     def __str__(self):
         return '{} pcs of {} by {}'.format(self.quantity, self.product, self.order.name)
+
+
+class DeliveryInfo(models.Model):
+    user = models.OneToOneField(to=get_user_model(), on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    address = models.CharField(max_length=255)
+    phone = models.CharField(max_length=31)

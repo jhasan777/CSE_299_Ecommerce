@@ -16,7 +16,7 @@ class Tag(models.Model):
 
 class Product(models.Model):
     title = models.CharField(max_length=255)
-    slug = models.SlugField()
+    slug = models.SlugField(primary_key=True)
     description = models.TextField()
     tag_set = models.ManyToManyField(to=Tag)
     price = models.FloatField()

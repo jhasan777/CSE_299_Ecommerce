@@ -48,12 +48,8 @@ INSTALLED_APPS = [
 
     "MySHOP", #MY apps
     'product',
-    'rating',
-    'review',
-    'cart',
-    'order',
-    'order_unit',
-    'unit',
+    #'cart',
+    #'order',
     'users',
 
 
@@ -135,7 +131,8 @@ ALLOWED_HOSTS = ['127.0.0.1','localhost','127.0.0.1','0.0.0.0']
 #####################################################################
 
 
-
+# Sessions
+SESSION_SAVE_EVERY_REQUEST = True
 
 
 

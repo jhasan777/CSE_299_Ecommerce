@@ -1,11 +1,9 @@
 
 from rest_framework import serializers
-from .models import Order, OrderUnit
+from .models import Order, OrderUnit, DeliveryInfo
 from PROJECT.product.serializers import ProductForOrderDetail
 
-
-
-
+#serialses order unit
 class OrderUnitSerializer(serializers.ModelSerializer):
     product = serializers.SerializerMethodField()
 
@@ -22,16 +20,11 @@ class OrderUnitSerializer(serializers.ModelSerializer):
         return data
 
 
-
-
-
-
 class OrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
         fields = ('name', 'address', 'phone')
-
 
 
 class OrderListSerializer(serializers.ModelSerializer):
@@ -57,3 +50,8 @@ class OrderDetailSerializer(serializers.ModelSerializer):
         fields = ('id', 'created_at', 'name', 'address', 'phone', 'products')
 
 
+class DeliveryInfoSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = DeliveryInfo
+        fields = ('name', 'address', 'phone')

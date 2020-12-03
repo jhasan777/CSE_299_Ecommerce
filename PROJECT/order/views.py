@@ -7,13 +7,35 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from restshop.api.order.models import Order
-from restshop.api.order.serializers import OrderListSerializer, OrderSerializer, OrderDetailSerializer
-from restshop.api.order_unit.models import OrderUnit
+from .models import Order, OrderUnit
+from .serializers import OrderListSerializer, OrderSerializer, OrderDetailSerializer, DeliveryInfoSerializer
 
 
-from restshop.api.user.models import DeliveryInfo
-from restshop.api.user.service import DeliveryInfoService
+from .models import DeliveryInfo
+from .service import DeliveryInfoService
+
+
+class DeliveryInfoView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        user = request.user
+        try:
+            deliveryinfo = user.deliveryinfo
+        except DeliveryInfo.DoesNotExist:
+            return Response({})
+
+        return Response(DeliveryInfoSerializer(deliveryinfo).data)
+
+    def post(self, request):
+        serializer = DeliveryInfoSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        DeliveryInfoService.delete_by_user(request.user)
+
+        serializer.save(user=request.user)
+
+        return Response(status=status.HTTP_201_CREATED)
 
 
 class OrderView(APIView):

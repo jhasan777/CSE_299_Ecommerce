@@ -55,7 +55,7 @@ class ProductForOrderDetail(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ('title', 'image', 'id', 'price', 'num_in_stock')
+        fields = ('title', 'image', 'slug', 'id', 'price', 'num_in_stock')
 
     def get_image(self, obj):
         image = obj.productimage_set.order_by('-is_main').first()
