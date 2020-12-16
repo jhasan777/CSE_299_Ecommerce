@@ -1,6 +1,16 @@
 from django.conf.urls import url
 
-from restshop.api.cart.views import CartView, CartUnitView
+from cart.views import CartView, CartUnitView
+
+
+# Userrouter = routers.DefaultRouter()
+# #
+# Userrouter.register(r'Users', views.UserViewSet)
+#
+# path('', include(Userrouter.urls)),
+
+
+
 
 urlpatterns = [
     url(r'^cart/$',                          CartView.as_view(), name='cart'),

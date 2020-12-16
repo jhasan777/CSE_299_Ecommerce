@@ -1,6 +1,15 @@
 from django.conf.urls import url
 
-from restshop.api.order.views import OrderView, OrderDetailView
+from order.views import OrderView, OrderDetailView,DeliveryInfoView
+
+# Userrouter = routers.DefaultRouter()
+# #
+# Userrouter.register(r'Users', views.UserViewSet)
+#
+# path('', include(Userrouter.urls)),
+
+
+
 
 urlpatterns = [
     url(r'^orders/$',                OrderView.as_view(), name='order-list'),

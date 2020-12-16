@@ -19,8 +19,11 @@ from django.urls import path,include
 
 ## from *unicorns*.views import *UnicornViewSet* --- import views for router
 
-#   router = DefaultRouter()
-#   router.register('unicorn', UnicornViewSet)
+# Userrouter = routers.DefaultRouter()
+# #
+# Userrouter.register(r'Users', views.UserViewSet)
+#
+# path('', include(Userrouter.urls)),
 
 
 
@@ -37,7 +40,9 @@ urlpatterns = [
     #### API's
 
     path('api/users/', include('users.urls')),  #users api urls|||includes /rest-auth
-    path('api/products/', include('product.urls')),
+    path('api/product/', include('product.urls')),
+    path('api/order/', include('order.urls')),
+    path('api/cart/', include('cart.urls')),
 
 
    # path('/store', include(#'product.urls')),

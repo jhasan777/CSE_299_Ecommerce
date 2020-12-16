@@ -4,6 +4,13 @@ from django.urls import path,include
 from .views import TagViewSet, RatingViewSet, ReviewViewSet, ProductListView, ProductDetailView
 
 
+# Userrouter = routers.DefaultRouter()
+# #
+# Userrouter.register(r'Users', views.UserViewSet)
+#
+# path('', include(Userrouter.urls)),
+
+
 
 review_list = ReviewViewSet.as_view({
     'get': 'list',
