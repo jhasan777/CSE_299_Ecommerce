@@ -1,11 +1,11 @@
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import serializers
 
-from PROJECT.product.models import Product
-from PROJECT.order.models import OrderUnit
+from product.models import Product
+from order.models import OrderUnit
 
 
-from PROJECT.product.serializers import ProductForOrderDetail
+from product.serializers import ProductForOrderDetail
 
 
 class CartUnitSerializer(serializers.Serializer):

@@ -1,7 +1,7 @@
 
 from rest_framework import serializers
 from .models import Order, OrderUnit, DeliveryInfo
-from PROJECT.product.serializers import ProductForOrderDetail
+from product.serializers import ProductForOrderDetail
 
 #serialses order unit
 class OrderUnitSerializer(serializers.ModelSerializer):

@@ -4,7 +4,7 @@ from django.db import models
 #  from PROJECT.users.models import User
 # from PROJECT.PROJECT.settings import AUTH_USER_MODEL
 from django.contrib.auth import get_user_model
-from PROJECT.product.models import Product
+from product.models import Product
 
 
 class Order(models.Model):

@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.contrib.sessions.models import Session
-from PROJECT.product.models import Product
+from product.models import Product
+
 # Create your models here.
 
 

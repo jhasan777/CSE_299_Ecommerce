@@ -45,11 +45,9 @@ INSTALLED_APPS = [
     'rest_auth',
 
 #'bkash',  # bkash api plugin
-
-    "MySHOP", #MY apps
+    'cart',
     'product',
-    #'cart',
-    #'order',
+    'order',
     'users',
 
 

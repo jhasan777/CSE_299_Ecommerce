@@ -7,13 +7,10 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-# from restshop.api.cart.models import CartUnit
-# from restshop.api.cart.serializers import CartUnitSerializer
-# from restshop.api.unit.models import Unit
 
 from .models import CartUnit
 from .serializers import CartUnitSerializer
-from PROJECT.product.models import Product
+from product.models import Product
 
 
 
